@@ -1,16 +1,16 @@
 # harbourside
-Sunday morning shopping - 17/may
+Sunday morning shopping - 2024-05-17
 
 ## Shopping List
 
-### Pantry & Dairy
-- [ ] Roasted vege cottage cheese
-- [ ] Noodles
-- [ ] Chickpea curry
-- [ ] Biranyi
-- [ ] 6 pack eggs
+### Meals
+- Roasted vege cottage cheese
+- Satay Noodles 
+- Chickpea curry
+- Biranyi
 
 ### Produce
+- [ ] 6 pack eggs
 - [ ] Apples
 - [ ] Grapes
 - [ ] Kale
