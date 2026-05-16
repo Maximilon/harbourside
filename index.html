@@ -1,24 +1,71 @@
----
-layout: default
-title: Harbourside
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harbourside</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+    }
+    h1 { margin-bottom: 0; }
+    h1 + p { color: #666; margin-top: 0.25rem; }
+    h3 { margin-top: 2rem; border-bottom: 1px solid #eee; padding-bottom: 0.25rem; }
+    ul { list-style: none; padding-left: 0; }
+    li { padding: 0.25rem 0; }
+    label { cursor: pointer; user-select: none; }
+    input[type="checkbox"] { margin-right: 0.5rem; transform: scale(1.2); }
+    input[type="checkbox"]:checked + span { text-decoration: line-through; color: #999; }
+  </style>
+</head>
+<body>
 
-<a href="../" class="back-link">← back</a>
+  <h1>harbourside</h1>
+  <p>Sunday morning shopping — 2024-05-17</p>
 
-<header>
-  <h1>Harbourside</h1>
-  <p class="subtitle">shopping trips</p>
-</header>
+  <h2>Shopping List</h2>
 
-<div class="store-grid">
-  {% assign sorted = site.harbourside | sort: 'date' | reverse %}
-  {% for trip in sorted %}
-    <a href="{{ trip.url | relative_url }}" class="date-card">
-      <span class="arrow">→</span>
-      <div class="date-title">{{ trip.title | default: trip.name }}</div>
-      {% if trip.date %}
-        <div class="date-meta">{{ trip.date | date: "%A, %d %b %Y" }}</div>
-      {% endif %}
-    </a>
-  {% endfor %}
-</div>
+  <h3>Meals</h3>
+  <ul>
+    <li>Roasted vege cottage cheese</li>
+    <li>Satay Noodles</li>
+    <li>Chickpea curry</li>
+    <li>Biranyi</li>
+  </ul>
+
+  <h3>Produce</h3>
+  <ul>
+    <li><label><input type="checkbox"> <span>6 pack eggs</span></label></li>
+    <li><label><input type="checkbox"> <span>Apples</span></label></li>
+    <li><label><input type="checkbox"> <span>Grapes</span></label></li>
+    <li><label><input type="checkbox"> <span>Kale</span></label></li>
+    <li><label><input type="checkbox"> <span>Bok choy</span></label></li>
+    <li><label><input type="checkbox"> <span>Green onions</span></label></li>
+    <li><label><input type="checkbox"> <span>Broccoli</span></label></li>
+    <li><label><input type="checkbox"> <span>Cherry tomatoes</span></label></li>
+    <li><label><input type="checkbox"> <span>White onions</span></label></li>
+    <li><label><input type="checkbox"> <span>1 kumura</span></label></li>
+    <li><label><input type="checkbox"> <span>1 beetroot</span></label></li>
+    <li><label><input type="checkbox"> <span>1 potato</span></label></li>
+  </ul>
+
+  <h3>Frozen</h3>
+  <ul>
+    <li><label><input type="checkbox"> <span>Frozen peas</span></label></li>
+  </ul>
+
+  <script>
+    document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+      const key = 'harbourside-' + i;
+      cb.checked = localStorage.getItem(key) === 'true';
+      cb.addEventListener('change', () => localStorage.setItem(key, cb.checked));
+    });
+  </script>
+
+</body>
+</html>
