@@ -1,0 +1,24 @@
+---
+layout: default
+title: Harbourside
+---
+
+<a href="../" class="back-link">← back</a>
+
+<header>
+  <h1>Harbourside</h1>
+  <p class="subtitle">shopping trips</p>
+</header>
+
+<div class="store-grid">
+  {% assign sorted = site.harbourside | sort: 'date' | reverse %}
+  {% for trip in sorted %}
+    <a href="{{ trip.url | relative_url }}" class="date-card">
+      <span class="arrow">→</span>
+      <div class="date-title">{{ trip.title | default: trip.name }}</div>
+      {% if trip.date %}
+        <div class="date-meta">{{ trip.date | date: "%A, %d %b %Y" }}</div>
+      {% endif %}
+    </a>
+  {% endfor %}
+</div>

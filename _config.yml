@@ -1,0 +1,21 @@
+title: Shopping Lists
+description: My shopping lists
+
+# Use kramdown for GFM-style checkbox parsing
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Build collections for each store
+collections:
+  harbourside:
+    output: true
+    permalink: /harbourside/:name
+
+defaults:
+  - scope:
+      path: ""
+      type: harbourside
+    values:
+      layout: shopping
+      store: harbourside

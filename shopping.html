@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a1a1a">
+<title>{{ page.title | default: page.name }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #fafaf7;
+    --ink: #1a1a1a;
+    --muted: #8a8a85;
+    --accent: #d4543a;
+    --done: #b8b6b0;
+    --card: #ffffff;
+    --border: #e8e6e0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 1.5rem 1.25rem 6rem;
+    max-width: 600px;
+    margin: 0 auto;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+    padding: 0.5rem 0;
+  }
+
+  .back-link:hover { color: var(--accent); }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 2.25rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+
+  h1 + p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+  }
+
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin: 1.75rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  /* Non-checkbox lists (like "Meals") */
+  li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink);
+  }
+
+  /* GFM task list items - the checkbox magic */
+  li.task-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    padding: 0.85rem 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    font-size: 1.05rem;
+    transition: opacity 0.2s ease;
+  }
+
+  li.task-list-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    min-width: 1.5rem;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    background: var(--card);
+    cursor: pointer;
+    margin-top: 0.05rem;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  li.task-list-item input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  li.task-list-item input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+
+  li.task-list-item.checked {
+    opacity: 0.5;
+  }
+
+  li.task-list-item.checked .item-text {
+    text-decoration: line-through;
+    color: var(--done);
+  }
+
+  .item-text {
+    flex: 1;
+    line-height: 1.4;
+    padding-top: 0.15rem;
+  }
+
+  .progress-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    padding: 0.85rem 1.25rem calc(0.85rem + env(safe-area-inset-bottom));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--muted);
+    z-index: 10;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 0 1rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .reset-btn {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .reset-btn:active { color: var(--accent); }
+</style>
+</head>
+<body>
+  <a href="../" class="back-link">← back</a>
+
+  <div class="content">
+    {{ content }}
+  </div>
+
+  <div class="progress-bar">
+    <span id="count">0 / 0</span>
+    <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+    <button class="reset-btn" onclick="resetList()">reset</button>
+  </div>
+
+<script>
+  // Storage key unique per page
+  const KEY = 'shopping:' + window.location.pathname;
+
+  // Wrap each task list item's text in a span for styling
+  document.querySelectorAll('li.task-list-item').forEach((li, idx) => {
+    const checkbox = li.querySelector('input[type="checkbox"]');
+    if (!checkbox) return;
+
+    // Enable the checkbox (Jekyll renders them disabled)
+    checkbox.disabled = false;
+    checkbox.id = 'item-' + idx;
+
+    // Wrap remaining text
+    const textNodes = [];
+    li.childNodes.forEach(n => {
+      if (n !== checkbox) textNodes.push(n);
+    });
+    const span = document.createElement('span');
+    span.className = 'item-text';
+    textNodes.forEach(n => span.appendChild(n));
+    li.appendChild(span);
+
+    // Load saved state
+    const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    if (saved[idx]) {
+      checkbox.checked = true;
+      li.classList.add('checked');
+    }
+
+    // Tap whole row to toggle
+    li.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT') {
+        checkbox.checked = !checkbox.checked;
+      }
+      li.classList.toggle('checked', checkbox.checked);
+      const state = JSON.parse(localStorage.getItem(KEY) || '{}');
+      state[idx] = checkbox.checked;
+      localStorage.setItem(KEY, JSON.stringify(state));
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const items = document.querySelectorAll('li.task-list-item');
+    const checked = document.querySelectorAll('li.task-list-item input:checked');
+    document.getElementById('count').textContent = checked.length + ' / ' + items.length;
+    const pct = items.length ? (checked.length / items.length) * 100 : 0;
+    document.getElementById('fill').style.width = pct + '%';
+  }
+
+  function resetList() {
+    if (!confirm('Uncheck everything?')) return;
+    localStorage.removeItem(KEY);
+    document.querySelectorAll('li.task-list-item').forEach(li => {
+      li.classList.remove('checked');
+      const cb = li.querySelector('input[type="checkbox"]');
+      if (cb) cb.checked = false;
+    });
+    updateProgress();
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>
